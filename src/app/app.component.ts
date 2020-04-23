@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { filter } from 'rxjs/operators';
 import { APP_ROUTES } from './app-routing.module';
-import { Routes } from '@angular/router';
+import { ActivatedRoute, ActivationEnd, Data, Router, RouterLinkActive, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,13 @@ import { Routes } from '@angular/router';
 })
 export class AppComponent {
   routes: Routes = APP_ROUTES;
+  currentRouteData: Data = null;
+
+  constructor(private router: Router) {
+    this.router.events
+        .pipe(filter(_ => _ instanceof ActivationEnd))
+        .subscribe((_: ActivationEnd) => {
+          this.currentRouteData = _?.snapshot?.data;
+        });
+  }
 }

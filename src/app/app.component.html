@@ -7,9 +7,10 @@
   <span class="app-title">Angular 9 Features</span>
 
   <div class="route-links">
-    <span *ngFor="let route of routes" class="menu-item">
+    <div *ngFor="let route of routes" class="menu-item">
       <a [routerLink]="'/' + route.path">{{route.data.label}}</a>
-    </span>
+      <div [class.arrow-up]="currentRouteData?.path === route?.path"></div>
+    </div>
   </div>
 </div>
 

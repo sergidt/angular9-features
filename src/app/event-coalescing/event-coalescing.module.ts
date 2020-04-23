@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { LazyLoadComponent } from './lazy-load.component';
 import { RouterModule, Routes } from '@angular/router';
 import { EventCoalescingComponent } from './event-coalescing.component';
 
