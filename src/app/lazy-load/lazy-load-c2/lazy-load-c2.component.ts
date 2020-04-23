@@ -1,20 +1,28 @@
-import { Component, ViewContainerRef, ComponentFactoryResolver, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, NgModule, Type } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MarkdownModule } from 'ngx-markdown';
+import { FooComponent } from './foo.component';
+
 // link: https://netbasal.com/welcome-to-the-ivy-league-lazy-loading-components-in-angular-v9-e76f0ee2854a
 @Component({
     template: `
-    <markdown [data]="markdown"></markdown>
+      <markdown [data]="markdown"></markdown>
+
+      <button mat-raised-button (click)="loadFoo()">Load FooComponent</button>
+      <div *ngIf="foo">
+        <ng-template [ngComponentOutlet]="foo | async"></ng-template>
+      </div>
     `,
     styles: [`
-             :host {
-               margin-top: 50px;
-             }
-             
-             button {
-               margin-right: 20px;
-               margin-bottom: 50px;
-             }
+               :host {
+                 margin-top: 50px;
+               }
+
+               button {
+                 margin-right: 20px;
+                 margin-bottom: 50px;
+               }
              `]
 })
 export class LazyLoadC2Component {
@@ -26,18 +34,13 @@ export class LazyLoadC2Component {
 \`\`\`
 `;
 
-    constructor(private viewContainerRef: ViewContainerRef, private cfr: ComponentFactoryResolver) { }
+    foo: Promise<Type<FooComponent>>;
 
-    async getLazy1() {
-        this.viewContainerRef.clear();
-        const { Lazy1Component } = await import('./lazy1/lazy1.component');
-        this.viewContainerRef.createComponent(this.cfr.resolveComponentFactory(Lazy1Component));
-    }
-
-    async getLazy2() {
-        this.viewContainerRef.clear();
-        const { Lazy2Component } = await import('./lazy2/lazy2.component');
-        this.viewContainerRef.createComponent(this.cfr.resolveComponentFactory(Lazy2Component));
+    loadFoo() {
+        if (!this.foo) {
+            this.foo = import(`./foo.component`)
+                .then(({ FooComponent }) => FooComponent);
+        }
     }
 
 }
@@ -45,7 +48,7 @@ export class LazyLoadC2Component {
 // MAGIC TIP!!
 @NgModule({
     imports: [MatButtonModule,
-    MarkdownModule],
+              MarkdownModule, CommonModule],
     declarations: [LazyLoadC2Component]
 })
 class LazyLoadC2Module {
