@@ -1,8 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { Component, NgModule, Type } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MarkdownModule } from 'ngx-markdown';
+import { Component, Type } from '@angular/core';
 import { FooComponent } from './foo.component';
 
 @Component({
