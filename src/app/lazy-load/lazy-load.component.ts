@@ -1,33 +1,37 @@
-import { Component, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-// link: https://johnpapa.net/angular-9-lazy-loading-components/
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
-    template: `<h1>Lazy Load</h1>
-    <button (click)="getLazy1()">Load lazy 1</button>
-    <button (click)="getLazy2()">Load lazy 2</button>
-    `,
+    template: `
+      <h1>Lazy loading with Ivy</h1>
+      <mat-button-toggle-group value="components-1" (change)="navigateTo($event.value)">
+        <mat-button-toggle value="components-1">Components 1</mat-button-toggle>
+        <mat-button-toggle value="components-2">Components 2</mat-button-toggle>
+        <mat-button-toggle value="modules">Modules</mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <router-outlet></router-outlet>`,
     styles: [`
-             button {
-               margin-right: 20px;
-             }
+               h1 {
+                 width: 100%;
+                 text-align: center;
+                 margin-bottom: 30px;
+               }
+
+               mat-button-toggle-group {
+                 margin-bottom: 50px;
+               }
+               
+               mat-button-toggle {
+                 width: 120px;
+               }
              `]
 })
 export class LazyLoadComponent {
-
-    constructor(
-        private viewContainerRef: ViewContainerRef,
-        private cfr: ComponentFactoryResolver
-    ) { }
-
-    async getLazy1() {
-        this.viewContainerRef.clear();
-        const { Lazy1Component } = await import('./lazy1/lazy1.component');
-        this.viewContainerRef.createComponent(this.cfr.resolveComponentFactory(Lazy1Component));
+    constructor(private router: Router, private route: ActivatedRoute) {
     }
 
-    async getLazy2() {
-        this.viewContainerRef.clear();
-        const { Lazy2Component } = await import('./lazy2/lazy2.component');
-        this.viewContainerRef.createComponent(this.cfr.resolveComponentFactory(Lazy2Component));
+    navigateTo(subPath: string) {
+        this.router.navigate([subPath], { relativeTo: this.route });
     }
-
 }
