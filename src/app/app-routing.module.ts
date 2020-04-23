@@ -9,6 +9,13 @@ export const APP_ROUTES: Routes = [
       label: 'Lazy load'
     },
     loadChildren: () => import('src/app/lazy-load/lazy-load.module').then(m => m.LazyLoadModule)
+  },
+  {
+    path: 'event-coalescing',
+    data: {
+      label: 'Event Coalescing'
+    },
+    loadChildren: () => import('src/app/event-coalescing/event-coalescing.module').then(m => m.EventCoalescingModule)
   }
 ];
 

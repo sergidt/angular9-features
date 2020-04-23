@@ -105,11 +105,15 @@ p {
   margin-left: 60px;
 }
 
-a,
-a:visited,
-a:hover {
-  color: #1976d2;
-  text-decoration: none;
+.menu-item {
+  margin: 0 20px;
+
+  a,
+  a:visited,
+  a:hover {
+    color: white;
+    text-decoration: none;
+  }
 }
 
 a:hover {
@@ -119,4 +123,14 @@ a:hover {
 .app-section {
   width: 100%;
   padding: 20px;
+}
+
+.app-title {
+  width: 200px;
+}
+
+.route-links {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
