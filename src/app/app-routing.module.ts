@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './home.component';
 
 
 export const APP_ROUTES: Routes = [
@@ -18,6 +19,14 @@ export const APP_ROUTES: Routes = [
       label: 'Event Coalescing'
     },
     loadChildren: () => import('src/app/event-coalescing/event-coalescing.module').then(m => m.EventCoalescingModule)
+  },
+  {
+    path: '',
+    data: {
+      path: 'home',
+      label: 'Home'
+    },
+    component: HomeComponent
   }
 ];
 

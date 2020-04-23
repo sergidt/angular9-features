@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivationEnd, Data, Router, Routes } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { APP_ROUTES } from './app-routing.module';
-import { ActivatedRoute, ActivationEnd, Data, Router, RouterLinkActive, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-root',
