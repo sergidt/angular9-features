@@ -2,3 +2,17 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.toggle-buttons-centered {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+mat-button-toggle-group {
+  margin-bottom: 50px;
+}
+
+mat-button-toggle {
+  width: 120px;
+}

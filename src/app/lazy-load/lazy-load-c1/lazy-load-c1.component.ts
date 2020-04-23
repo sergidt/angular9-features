@@ -23,6 +23,12 @@ import { MarkdownModule } from 'ngx-markdown';
 export class LazyLoadC1Component {
 
     markdown = `# Lazy loading components: ViewContainerRef + ComponentFactoryResolver
+    
+Using Webpack import function automatically it starts code-splitting your application:
+* A new chunk is created for the any loaded file, and is not include it in the main bundle. 
+* Everything is already configured for you, and you can start using it immediately.
+* Note that there is no need anymore to add the component to the module’s entryComponents array. Angular finds the component on its own.
+
 \`\`\`typescript
 constructor(private viewContainerRef: ViewContainerRef, private cfr: ComponentFactoryResolver) { }
 
