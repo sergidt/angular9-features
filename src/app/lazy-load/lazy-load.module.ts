@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatStepperModule } from '@angular/material/stepper';
 import { LazyLoadC1Component } from './lazy-load-c1/lazy-load-c1.component';
 import { LazyLoadC2Component } from './lazy-load-c2/lazy-load-c2.component';
 import { LazyLoadComponent } from './lazy-load.component';

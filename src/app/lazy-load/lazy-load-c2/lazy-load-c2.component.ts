@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, Type } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MarkdownModule } from 'ngx-markdown';
+import { CommunicationDIComponent } from './communication-di.component';
+import { CreatingComponentComponent } from './creating-component.component';
 import { FooComponent } from './foo.component';
 
 // link: https://netbasal.com/welcome-to-the-ivy-league-lazy-loading-components-in-angular-v9-e76f0ee2854a
@@ -9,10 +12,17 @@ import { FooComponent } from './foo.component';
     template: `
       <markdown [data]="markdown"></markdown>
 
-      <button mat-raised-button (click)="loadFoo()">Load FooComponent</button>
-      <div *ngIf="foo">
-        <ng-template [ngComponentOutlet]="foo | async"></ng-template>
-      </div>
+      <mat-horizontal-stepper>
+        <mat-step>
+          <ng-template matStepLabel>Loading component</ng-template>
+          <creating-component></creating-component>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Communication: DI</ng-template>
+          <communication-DI></communication-DI>
+        </mat-step>
+      </mat-horizontal-stepper>
     `,
     styles: [`
                :host {
@@ -34,45 +44,14 @@ Using Webpack import function automatically it starts code-splitting your applic
 * Everything is already configured for you, and you can start using it immediately.
 * Note that there is no need anymore to add the component to the module’s entryComponents array. Angular finds the component on its own.
 
-
-\`\`\`typescript
-@Component({
-    template: \`
-      <button mat-raised-button (click)="loadFoo()">Load FooComponent</button>
-      <div *ngIf="foo">
-        <ng-template [ngComponentOutlet]="foo | async"></ng-template>
-      </div>
-})
-    \`,
-export class LazyLoadC2Component {
-
-    foo: Promise<Type<FooComponent>>;
-
-    loadFoo() {
-        if (!this.foo) {
-            this.foo = import(\`./foo.component\`)
-                .then(({ FooComponent }) => FooComponent);
-        }
-    }
-}
-
-\`\`\`
 `;
-    foo: Promise<Type<FooComponent>>;
-
-    loadFoo() {
-        if (!this.foo) {
-            this.foo = import(`./foo.component`)
-                .then(({ FooComponent }) => FooComponent);
-        }
-    }
 }
 
 // MAGIC TIP!!
 @NgModule({
     imports: [MatButtonModule,
-              MarkdownModule, CommonModule],
-    declarations: [LazyLoadC2Component]
+              MarkdownModule, CommonModule, MatStepperModule],
+    declarations: [LazyLoadC2Component, CreatingComponentComponent, CommunicationDIComponent]
 })
 class LazyLoadC2Module {
 }
