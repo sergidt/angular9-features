@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, NgModule, Type } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MarkdownModule } from 'ngx-markdown';
 import { CommunicationDIComponent } from './communication-di.component';
 import { CreatingComponentComponent } from './creating-component.component';
@@ -12,21 +13,20 @@ import { FooComponent } from './foo.component';
     template: `
       <markdown [data]="markdown"></markdown>
 
-      <mat-horizontal-stepper>
-        <mat-step>
-          <ng-template matStepLabel>Loading component</ng-template>
+      <mat-tab-group>
+        <mat-tab label="Loading component">
           <creating-component></creating-component>
-        </mat-step>
+        </mat-tab>
 
-        <mat-step>
-          <ng-template matStepLabel>Communication: DI</ng-template>
+        <mat-tab label="Communication: DI">
           <communication-DI></communication-DI>
-        </mat-step>
-      </mat-horizontal-stepper>
+        </mat-tab>
+      </mat-tab-group>
     `,
     styles: [`
                :host {
                  margin-top: 50px;
+                 position: relative;
                }
 
                button {
@@ -50,7 +50,7 @@ Using Webpack import function automatically it starts code-splitting your applic
 // MAGIC TIP!!
 @NgModule({
     imports: [MatButtonModule,
-              MarkdownModule, CommonModule, MatStepperModule],
+              MarkdownModule, CommonModule, MatTabsModule],
     declarations: [LazyLoadC2Component, CreatingComponentComponent, CommunicationDIComponent]
 })
 class LazyLoadC2Module {

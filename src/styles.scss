@@ -19,3 +19,14 @@ mat-button-toggle-group {
 mat-button-toggle {
   width: 120px;
 }
+
+.mat-tab-body-content {
+  height: 100% !important;
+  display: flex !important;
+  overflow: auto !important;
+  flex-direction: column !important;
+}
+
+pre.language-typescript {
+  max-height: 600px;
+}

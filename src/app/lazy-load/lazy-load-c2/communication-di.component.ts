@@ -14,9 +14,16 @@ import { FooDIComponent } from './foo-di.component';
     `,
     styles: [`
                :host {
-                 margin-top: 50px;
+                 margin-top: 30px;  
+                 display: flex;
+                 align-items: center;
                }
 
+               markdown {
+                width: 800px;
+                 margin-right: 100px;
+               }
+               
                button {
                  margin-right: 20px;
                  margin-bottom: 50px;
