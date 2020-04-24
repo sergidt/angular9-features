@@ -9,7 +9,7 @@ import { APP_ROUTES } from './app-routing.module';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  routes: Routes = APP_ROUTES;
+  routes: Routes = APP_ROUTES.filter(_ => !!_.data.label);
   currentRouteData: Data = null;
 
   constructor(private router: Router) {}

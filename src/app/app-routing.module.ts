@@ -23,8 +23,7 @@ export const APP_ROUTES: Routes = [
   {
     path: '',
     data: {
-      path: 'home',
-      label: 'Home'
+      path: 'home'
     },
     component: HomeComponent
   }
